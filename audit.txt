@@ -1,0 +1,16 @@
+2022-11-01T01:06:06.895201 : one Twix removed from the inventory
+2022-11-01T06:36:47.492039 : one Hersheys removed from the inventory
+2022-11-01T08:57:51.064507 : one Crunch removed from the inventory
+2022-11-01T09:36:20.819661 : one Twix removed from the inventory
+2022-11-01T10:02:23.758758 : one Hersheys removed from the inventory
+2022-11-01T10:04:30.476290 : one Hersheys removed from the inventory
+2022-11-01T10:09:34.779200 : one M&Ms removed from the inventory
+2022-11-01T10:11:52.071175 : one Hersheys removed from the inventory
+2022-11-01T14:43:42.286482 : one Skittles removed from the inventory
+2022-11-01T14:49:38.032049 : one Hersheys removed from the inventory
+2022-11-01T14:52:22.289878 : one Starburst removed from the inventory
+2022-11-01T14:55:29.994686 : one Starburst removed from the inventory
+2022-11-01T14:59:42.626417 : one Snickers removed from the inventory
+2022-11-01T18:47:12.296146 : one MilkyWay removed from the inventory
+2022-11-01T18:54:55.409823 : one Haribo removed from the inventory
+2022-11-01T18:56:42.088440 : one Skittles removed from the inventory
