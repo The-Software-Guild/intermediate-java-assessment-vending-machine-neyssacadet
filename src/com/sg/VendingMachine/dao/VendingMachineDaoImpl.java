@@ -101,12 +101,6 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         return item.get(itemID);
     }
 
-    @Override
-    public int getItemInventory(String name) throws VendingMachinePersistenceException {
-        loadItems();
-        return item.get(name).getItemInventory();
-    }
-
     //DONE: GET ALL ITEMS
     @Override
     public List<Item> getAllItems() throws VendingMachinePersistenceException {
@@ -114,6 +108,11 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         return new ArrayList<>(item.values());
     }
 
+    @Override
+    public Item addItem(String itemID, Item item1) {
+        Item prevItem = item.put(itemID, item1);
+        return prevItem;
+    }
     //DONE - REMOVE 1 ITEM FROM INVENTORY
     @Override
     public void removeOneItemFromInventory(String itemID) throws VendingMachinePersistenceException {
@@ -122,7 +121,6 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         item.get(itemID).setItemInventory(prevInventory - 1);
         writeItems();
         audit.writeAuditEntry("one " + item.get(itemID).getItemName() + " removed from the inventory" );
-
     }
 
     @Override
@@ -147,7 +145,14 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
 
     //updates item from storage to memory
     @Override
-    public Item updateItem(String itemID, Item item) {
-        return null; //item.replace(itemID, item);
+    public Item updateItem(String itemID, Item item1) {
+        return item.replace(itemID, item1);
     }
+
+    @Override
+    public Item removeItem(String itemID) {
+        Item removedItem = item.remove(itemID);
+        return removedItem;
+    }
+
 }

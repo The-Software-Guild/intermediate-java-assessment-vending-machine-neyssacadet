@@ -14,3 +14,7 @@
 2022-11-01T18:47:12.296146 : one MilkyWay removed from the inventory
 2022-11-01T18:54:55.409823 : one Haribo removed from the inventory
 2022-11-01T18:56:42.088440 : one Skittles removed from the inventory
+2022-11-02T09:51:40.878958 : one null removed from the inventory
+2022-11-02T09:58:30.057971 : one Twix removed from the inventory
+2022-11-02T14:00:38.597216 : one MilkyWay removed from the inventory
+2022-11-02T15:09:36.440727 : one Snickers removed from the inventory

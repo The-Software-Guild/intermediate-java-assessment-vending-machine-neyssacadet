@@ -14,6 +14,13 @@ public class Item {
         this.itemID = itemID;
     }
 
+    public Item (String itemID, String itemName, BigDecimal itemCost, int itemInventory){
+        this.itemID = itemID;
+        this.itemName = itemName;
+        this.itemCost = itemCost;
+        this.itemInventory = itemInventory;
+    }
+
     public String getItemID() {
         return itemID;
     }
@@ -46,10 +53,10 @@ public class Item {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * +Objects.hashCode(this.itemID);
-        hash = 79 * +Objects.hashCode(this.itemCost);
-        hash = 79 * +Objects.hashCode(this.itemName);
-        hash = 79 * +Objects.hashCode(this.itemInventory);
+        hash = 79 * hash + Objects.hashCode(this.itemID);
+        hash = 79 * hash + Objects.hashCode(this.itemName);
+        hash = 79 * hash + Objects.hashCode(this.itemCost);
+        hash = 79 * hash + Objects.hashCode(this.itemInventory);
         return hash;
     }
 
