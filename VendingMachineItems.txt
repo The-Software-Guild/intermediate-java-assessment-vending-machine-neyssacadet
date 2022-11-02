@@ -1,0 +1,9 @@
+1::Snickers::2.10::4
+2::Hersheys::3.99::-2
+3::Starburst::2.50::5
+4::Skittles::1.99::5
+5::Crunch::2.45::10
+6::MilkyWay::1.89::8
+7::Twix::3.89::6
+8::M&Ms::2.15::8
+9::Haribo::2.00::8
