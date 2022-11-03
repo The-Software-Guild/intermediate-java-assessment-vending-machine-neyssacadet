@@ -8,13 +8,8 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 public interface VendingMachineService {
-    public Map<String, Item> loadItemsInStock() throws VendingMachinePersistenceException;
-
-    public void saveItemList() throws VendingMachinePersistenceException;
 
     public Item getChosenItem(String itemId) throws VendingMachinePersistenceException;
-
-    public void updateItemSale(Item item) throws VendingMachineNoItemInventoryException;
 
     Change calculateChange(BigDecimal amount, Item item);
 

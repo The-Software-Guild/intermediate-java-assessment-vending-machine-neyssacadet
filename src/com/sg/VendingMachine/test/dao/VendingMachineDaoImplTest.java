@@ -9,7 +9,10 @@ import org.junit.jupiter.api.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -149,11 +152,11 @@ class VendingMachineDaoImplTest {
         assertTrue( allItems.isEmpty(), "The retrieved list of items should be empty.");
 
         // they should be null!
-        Item retrievedStudent = testDao.getItem(I1.getItemID());
-        assertNull(retrievedStudent, "Snickers was removed, should be null.");
+        Item retrievedItem = testDao.getItem(I1.getItemID());
+        assertNull(retrievedItem, "Snickers was removed, should be null.");
 
-        retrievedStudent = testDao.getItem(I2.getItemID());
-        assertNull(retrievedStudent, "Cheetos was removed, should be null.");
+        retrievedItem = testDao.getItem(I2.getItemID());
+        assertNull(retrievedItem, "Cheetos was removed, should be null.");
 
     }
 
@@ -179,4 +182,28 @@ class VendingMachineDaoImplTest {
         assertEquals(bd, result.getItemCost(), "updated item price is 1.05");
         assertEquals(12, result.getItemInventory(), "update items in stock");
     }
+
+    @Test
+    public void testGetAllItemIds(){
+        System.out.println("getAllItemIds");
+        BigDecimal bd = new BigDecimal("2.50");
+        Item I1 = new Item("1", "cake", bd, 10);
+        bd = new BigDecimal("1.05");
+        Item I2 = new Item("2", "water", bd, 12);
+        testDao.addItem(I1.getItemID(), I1);
+        testDao.addItem(I2.getItemID(), I2);
+        //result
+        List<String> result = testDao.getAllItemIds();
+        //excepted result
+        List<String> expResult = new ArrayList();
+        expResult.add("1");
+        expResult.add("2");
+        //assert
+        assertNotNull(result, "The List of Items ids must not be null");
+        assertEquals(2, result.size(), "List of item ids should be 2");
+        assertTrue(result.contains(I1.getItemID()), "The list of items should include cake and water");
+        assertTrue(result.contains(I2.getItemID()), "2 lists os items should be the same");
+        assertEquals(expResult, result, "2 lists of items should be the same");
+    }
+
 }

@@ -10,18 +10,21 @@ import com.sg.VendingMachine.service.VendingMachineServiceImpl;
 import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class VendingMachineServiceImplTest {
 
-    public VendingMachineService testService;
+    VendingMachineDao dao = new VendingMachineDaoImpl();
+    VendingMachineAuditDao auditdao = new VendingMachineAuditDaoImpl();
+    VendingMachineService testService = new VendingMachineServiceImpl(dao, auditdao);
 
     public VendingMachineServiceImplTest() {
-        VendingMachineDao dao = new VendingMachineDaoImpl();
-        VendingMachineAuditDao auditdao = new VendingMachineAuditDaoImpl();
-        testService = new VendingMachineServiceImpl(dao, auditdao);
+
     }
+
     @BeforeAll
     public static void setUpClass() {
     }
@@ -41,11 +44,15 @@ class VendingMachineServiceImplTest {
     @Test
     public void testCalculateChange() throws VendingMachineNoItemInventoryException, VendingMachinePersistenceException {
         System.out.println("calculateChange");
-        BigDecimal amount = new BigDecimal(5);
-        Item item = testService.getChosenItem("1");
-        Change result = testService.calculateChange(amount, item);
+        Item I2 = new Item("2");
+        BigDecimal price = new BigDecimal(5);
+        I2.setItemName("Cheetos");
+        I2.setItemCost(price);
+        I2.setItemInventory(10);
+
+        Change result = testService.calculateChange(I2.getItemCost(), I2);
         //assert
-        assertEquals(10, result.getQuarters(), "Check number of quarters");
+        assertEquals(0, result.getQuarters(), "Check number of quarters");
         assertEquals(0, result.getDimes(), "Check number of dimes");
         assertEquals(0, result.getNickel(), "Check number of nickels");
         assertEquals(0, result.getPennies(), "Check number of pennies");
@@ -53,30 +60,55 @@ class VendingMachineServiceImplTest {
     }
 
     @Test
-    public void testCheckSufficientMoneyToBuyItem(BigDecimal inputAmount, Item item) throws VendingMachineInsufficientFundsException, VendingMachineNoItemInventoryException, VendingMachinePersistenceException, VendingMachinePersistenceException {
-        System.out.println("checkSufficientMoneyToBuyItem");
-        inputAmount = new BigDecimal(3.50);
-        item = testService.getChosenItem("1");
-        testService.checkSufficientMoneyToBuyItem(inputAmount, item);
+    public void testCheckSufficientMoneyToBuyItem() {
+        System.out.println("checkSufficientFunds");
+        //ARRANGE
+        Item hariboClone = new Item("2");
+        hariboClone.setItemCost(new BigDecimal("1.60"));
+        hariboClone.setItemInventory(9);
+
+        BigDecimal enoughMoney = new BigDecimal("2.00");
+        BigDecimal notEnoughMoney = new BigDecimal("1.59");
+
+        //ACT - enough money
+        try {
+            testService.checkSufficientMoneyToBuyItem(enoughMoney, hariboClone);
+        } catch (VendingMachineInsufficientFundsException e){
+            fail("There is sufficient funds, exception should not have been thrown");
+        }
+        //ACT - not enough money
+        try {
+            testService.checkSufficientMoneyToBuyItem(notEnoughMoney, hariboClone);
+            fail("There insufficient funds, exception should have been thrown");
+        } catch (VendingMachineInsufficientFundsException e){
+        }
     }
 
     @Test
-    void loadItemsInStock() {
+    public void testGetChosenItem() throws VendingMachinePersistenceException {
+        System.out.println("getChosenItem");
+        Item expResult = new Item("1");
+        Item result = new Item("1");
+        assertEquals(expResult, result, "Check both items equal.");
+        assertEquals(expResult.getItemName(), result.getItemName(), "Check both items");
     }
 
     @Test
-    void saveItemList() {
+    void testvalidateItemInStock() throws VendingMachineNoItemInventoryException {
+        System.out.println("validateItemInStock");
+        String itemID = "2";
+        Item I2 = new Item(itemID);
+        BigDecimal price = new BigDecimal(5);
+        I2.setItemName("Cheetos");
+        I2.setItemCost(price);
+        I2.setItemInventory(0);
+
+        try {
+            testService.validateItemInStock(itemID);
+            fail("Selected item is not in stock");
+        } catch (VendingMachineNoItemInventoryException e){
+
+        }
     }
 
-    @Test
-    void getChosenItem() {
-    }
-
-    @Test
-    void updateItemSale() {
-    }
-
-    @Test
-    void validateItemInStock() {
-    }
 }

@@ -36,7 +36,7 @@ public class VendingMachineServiceImpl implements VendingMachineService {
         }
     }
 
-    @Override
+    /*@Override
     public Map<String, Item> loadItemsInStock() throws VendingMachinePersistenceException {
         Map<String, Item> itemsInStock = new HashMap<>();
         for (Item item : dao.loadItems().values()) {
@@ -53,7 +53,7 @@ public class VendingMachineServiceImpl implements VendingMachineService {
     public void saveItemList() throws VendingMachinePersistenceException {
         dao.writeItems();
         auditDao.writeAuditEntry("Item list saved to file.");
-    }
+    }*/
 
     @Override
     public Item getChosenItem(String itemId) throws VendingMachinePersistenceException {
@@ -65,7 +65,7 @@ public class VendingMachineServiceImpl implements VendingMachineService {
         return dao.getItem(itemId);
     }
 
-    @Override
+    /*@Override
     public void updateItemSale(Item item) throws VendingMachineNoItemInventoryException {
         if (item.getItemInventory() > 0) {
             item.setItemInventory(item.getItemInventory() - 1);
@@ -78,7 +78,7 @@ public class VendingMachineServiceImpl implements VendingMachineService {
         } catch (VendingMachinePersistenceException ex) {
             Logger.getLogger(VendingMachineServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
 
     @Override
     public void validateItemInStock(String itemID) throws VendingMachineNoItemInventoryException {

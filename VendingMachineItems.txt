@@ -1,5 +1,5 @@
 1::Snickers::2.10::4
-2::Hersheys::3.99::10
+2::Hersheys::3.99::9
 3::Starburst::2.50::5
 4::Skittles::1.99::5
 5::Crunch::2.45::10
